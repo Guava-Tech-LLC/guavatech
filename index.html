@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guava Tech LLC — AI Consulting</title>
+  <style>
+    :root {
+      --green:  #3d8b37;
+      --green2: #52a34b;
+      --green3: #d4edda;
+      --dark:   #1a2e1a;
+      --text:   #2c2c2c;
+      --muted:  #5a6a5a;
+      --bg:     #f9fdf9;
+      --white:  #ffffff;
+      --border: #dceadc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+    }
+    .nav-logo {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .nav-logo span { color: #7ed07a; }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a { color: #cde8cd; font-size: 0.9rem; }
+    .nav-links a:hover { color: #fff; text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, #2a4a2a 60%, #3d6b3d 100%);
+      color: #fff;
+      padding: 5rem 2rem 4.5rem;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #b0e0b0;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em { color: #7ed07a; font-style: normal; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #c8dfc8;
+      max-width: 640px;
+      margin: 0 auto 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.88; text-decoration: none; }
+    .btn-primary { background: var(--green2); color: #fff; }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.4);
+      color: #fff;
+      margin-left: 0.75rem;
+    }
+
+    /* ── SECTION ── */
+    section { padding: 4.5rem 2rem; }
+    .container { max-width: 1060px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.2rem;
+      background: var(--bg);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(61,139,55,0.12); }
+    .card-icon {
+      width: 52px; height: 52px;
+      background: var(--green3);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+    .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--dark); }
+    .card p  { font-size: 0.92rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .card ul { padding-left: 1.1rem; font-size: 0.88rem; color: var(--muted); }
+    .card ul li { margin-bottom: 0.3rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-left h2 { margin-bottom: 0.75rem; }
+    .about-left p { color: var(--muted); margin-bottom: 1rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .tag {
+      background: var(--green3);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      width: 100%;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem 1.2rem;
+      text-align: center;
+    }
+    .stat-card .num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-card .desc { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--dark); color: #fff; text-align: center; }
+    #contact h2 { color: #fff; }
+    #contact .lead { color: #9ab89a; max-width: 500px; margin: 0.75rem auto 2rem; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+    .contact-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #c8e8c8;
+      border-radius: 10px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.2); text-decoration: none; color: #fff; }
+    .contact-link svg { width: 22px; height: 22px; fill: currentColor; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0f1f0f;
+      color: #4a6a4a;
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Guava <span>Tech</span> LLC</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">AI Consulting &amp; Research</div>
+  <h1>Turning <em>Cutting-Edge AI</em><br>into Production Reality</h1>
+  <p>Guava Tech LLC specializes in two high-impact AI services: intelligent document analysis and deepfake detection — built on research-grade expertise and shipped as production-ready systems.</p>
+  <a href="#contact" class="btn btn-primary">Get in Touch</a>
+  <a href="#services" class="btn btn-outline">Explore Services</a>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-label">What We Do</div>
+    <h2>End-to-End AI Consulting</h2>
+    <p class="lead">Two focused services where deep research expertise meets real-world deployment needs.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <h3>Document Intelligence</h3>
+        <p>Automated understanding of complex documents — from logistics reports and invoices to scientific papers and forms. Powered by multimodal LLMs with production-grade reliability.</p>
+        <ul>
+          <li>Automatically extract data from invoices, reports, forms, and contracts</li>
+          <li>Works across complex layouts: tables, multi-column, scanned documents</li>
+          <li>Supports multiple languages and industry-specific document types</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔎</div>
+        <h3>Deepfake Detection</h3>
+        <p>Determine whether a facial image or video is authentic or AI-generated. Built on deep expertise in generative models — understanding how fakes are made is the foundation of detecting them.</p>
+        <ul>
+          <li>Flags manipulated media before it reaches moderation or identity checks</li>
+          <li>Supports images, video clips, and real-time stream analysis</li>
+          <!-- <li>Lightweight API — drop into existing moderation or identity pipelines</li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="section-label">About</div>
+        <h2>Founder-Led, Research-Backed,<br>Delivery-Focused.</h2>
+        <p>Guava Tech LLC is a boutique AI consulting firm. Every engagement is led directly by the founder — a Ph.D. computer scientist with 5+ years of hands-on experience building and shipping AI systems in production.</p>
+        <p>Our work is grounded in deep technical research — with published contributions at CVPR, ICCV, AAAI, and WACV — and executed with a focus on practical results for our clients.</p>
+        <p>We work closely with a small number of clients at a time, so you always get senior-level attention, not a junior team hand-off.</p>
+        <div class="tag-list">
+          <span class="tag">Document AI</span>
+          <span class="tag">Deepfake Detection</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Multimodal AI</span>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="num">5+</div>
+            <div class="desc">Years Industry Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">E2E</div>
+            <div class="desc">From Research to Deployment</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">Ph.D.</div>
+            <div class="desc">Computer Science &amp; Engineering</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">100%</div>
+            <div class="desc">Founder-Led Engagements</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label" style="color:#7ed07a;">Contact</div>
+    <h2>Ready to Work Together?</h2>
+    <p class="lead">Whether you're exploring a new AI product, need an expert collaborator for your research team, or want to accelerate your ML deployment — let's talk.</p>
+
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:guavatechllc@gmail.com" title="Email us">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+      <a class="contact-link" href="https://github.com/guavatech-llc" target="_blank" rel="noopener" title="GitHub">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+    </div>
+
+    <p style="font-size:0.85rem; color:#5a7a5a;">McLean, VA &nbsp;·&nbsp; Available for remote and on-site engagements</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2025 Guava Tech LLC. All rights reserved.
+</footer>
+
+</body>
+</html>
